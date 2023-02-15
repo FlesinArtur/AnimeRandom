@@ -18,11 +18,13 @@ def get_anime_info(anime_html):
     anime_information = soup.find("div", class_="story_c_text").find_parent()
     anime_information.find("div", class_="story_c_text").decompose()
     anime_information = anime_information.text.strip("\n").replace("\n\n", "\n")
+    anime_picture = "https://anitube.in.ua" + soup.find('span', class_='story_post').find('img').get('src')
     return {
         "url": anime_url,
         "title": anime_title,
         "information": anime_information,
-        "description": anime_description
+        "description": anime_description,
+        "picture": anime_picture
     }
 
 
@@ -31,6 +33,7 @@ def print_anime_info(info):
     print(f'Посилання:\n{info["url"]}')
     print(f'Інформація:\n{info["information"]}')
     print(f'Опис:\n{info["description"]}')
+    print(f'Картинка:\n{info["picture"]}')
 
 
 if __name__ == '__main__':
